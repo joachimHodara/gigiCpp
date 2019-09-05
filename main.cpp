@@ -7,7 +7,9 @@ class Vec2
 public:
     Vec2(float x = 0, float y = 0)
     : x_(x), y_(y)
-    {}
+    {
+        counter_++;
+    }
 
     float getx() const
     {
@@ -43,9 +45,14 @@ public:
         return Vec2(x_ + u.x_, y_ + u.y_);
     }
 
+    static int howMany() { return counter_; }
+
 private:
     float x_, y_;
+    static int counter_;
 };
+
+int Vec2::counter_ = 0;
 
 std::ostream& operator<<(std::ostream& out, const Vec2& v)
 {
@@ -57,6 +64,8 @@ int main()
 {
     Vec2 v(2,3);
     Vec2 u(3);
+
+    std::cout << Vec2::howMany() << std::endl;
 
     Vec2 w = v + u;
     std::cout << w << std::endl;
